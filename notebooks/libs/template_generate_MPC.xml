@@ -1,0 +1,8 @@
+<ParameterList name="***MPC NAME***">
+  <Parameter name="PK type" type="string" value="***TYPE***" />
+  <Parameter name="PKs order" type="Array(string)" value="***{PK1, PK2}***" />
+  <Parameter name="subcycle" type="Array(int)" value="***{0,1}***" />
+  <ParameterList name="verbose object" type="ParameterList">
+    <Parameter name="verbosity level" type="string" value="***VERBOSE LEVEL***" />
+  </ParameterList>
+</ParameterList>

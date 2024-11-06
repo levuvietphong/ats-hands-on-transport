@@ -1,0 +1,9 @@
+  <ParameterList name="***CHILD DOMAIN***">
+    <Parameter name="mesh type" type="string" value="extracted" />
+    <ParameterList name="extracted parameters">
+      <Parameter name="parent domain" type="string" value="***PARENT DOMAIN***" />
+      <Parameter name="region" type="string" value="***CHILD DOMAIN***" />
+    </ParameterList>
+    <ParameterList name="***CHILD DOMAIN***">
+    </ParameterList>
+  </ParameterList>

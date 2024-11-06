@@ -1,0 +1,7 @@
+.DS_Store
+.vscode/
+__pycache__/
+
+*.h5
+1-hydrology/results/
+2-transport/results/
