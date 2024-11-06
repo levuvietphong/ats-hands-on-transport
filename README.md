@@ -1,43 +1,48 @@
 # Amanzi-ATS Transport Tutorial
 
-This hands-on tutorial focuses on adding transport simulations to the hydrology model in Amanzi-ATS.
+This hands-on tutorial offers a hands-on experience in setting up and running transport simulations based on hydrology models in [Amanzi-ATS](https://github.com/amanzi/ats). This is part of the IDEAS-Watershed All-hands Meeting 2024 in Denver, CO.
 
-Facilitators: Phong Le, Ethan Coon, Daniil Svyatsky
+**Facilitators:** Phong Le, Ethan Coon, Daniil Svyatsky
+
+---
 
 ### 1. Learning Objectives
+By the end of this workshop, participants will be able to:
+* Understand core concepts of the [transport process kernel (PK)](https://github.com/amanzi/ats/tree/master/src/pk_transport) in Amanzi-ATS
+* Develop workflows that integrate transport processes into [hydrology](https://amanzi.github.io/ats/stable/input_spec/process_kernels/physical/flow.html) models
 
-At the end of the workshop, participants will be able to:
-
-* Understand the fundamental principles of transport process kernel (PK) in Amanzi-ATS
-* Develop the workflow to integrate transport processes into hydrology models
+---
 
 ### 2. Prerequisites
+To get the most out of this tutorial, participants should have:
+* Basic skills in Python and familiarity with [Jupyter Notebook](https://jupyter.org/). We will use [PyVista](https://pyvista.org/) for visualization.
+* A fundamental understanding of watershed hydrology is encouraged.
 
-Participants are encouraged to have:
-* Essential skills with python and jupyter notebook
-* Basic knowledge of watershed hydrology
-
-### 3. Materials and Resources
-Pull the docker container:
+---
+### 3. Setup Instructions
+1. **Pull the Docker Image:**
+Make sure to pull the Docker container for this tutorial:
 ```bash
-docker pull --platform linux/amd64 levuvietphong/ats:latest
+docker pull --platform linux/amd64 metsi/ideas-watersheds-all-hands-2024:v0
 ```
 
-Run the container:
+2. **Run the container:**
+Start the container and open the Jupyter Notebook interface:
 ```bash
-docker run --rm -it -p 8888:8888 levuvietphong/ats:latest
+docker run --rm -it -p 8888:8888 metsi/ideas-watersheds-all-hands-2024:v0
 ```
-* Open the link displayed in your browser
+
+3. **Access Jupyter Notebooks:**
+Open the link displayed in your terminal to access Jupyter Notebook in your browser.
+
+---
 
 ### 4. Workshop Outline
+* **Introduction to ATS Hydrology and Transport:**  
+Overview of fundamental equations in hydrology and transport in Amanzi-ATS
 
-* **Introduction to ATS Transport:**  
-
-_Get an overview of ATS Transport_
-
-* **Hands-On Session: Setting up a transport simulation:**
-
-_Develop a transport simulation based on the integrated hydrology model in ATS._
-
+* **Hands-On Session: Building transport simulations:**
+Step-by-step guidance on developing transport simulations in ATS based on the integrated hydrology model.
 
 * **Discussion and Feedbacks** 
+Open session for questions, insights, and feedback on the tutorial content.
