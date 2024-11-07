@@ -5,7 +5,7 @@ import geopandas as gpd
 import h5py
 from pyproj.crs import CRS
 from matplotlib import pyplot as plt
-from matplotlib.colors import Normalize
+from matplotlib.colors import Normalize, LogNorm
 from matplotlib.patches import Polygon  # Use this instead of PolygonPatch
 import shapely
 import colorcet as cc
@@ -96,7 +96,7 @@ def GetMeshPolygons(mfile=None):
 
 
 def PlotPolygonsFields(polygons, field, cmap='jet', alpha=1, lw=1, edgecolor='k',
-                       vmin=None, vmax=None, label=None, colorbar=False, ax=None):
+                       vmin=None, vmax=None, label=None, colorbar=False, logscale=False, ax=None):
     """
     Plots Shapely polygons with colors based on the provided field values.
     """
@@ -112,7 +112,7 @@ def PlotPolygonsFields(polygons, field, cmap='jet', alpha=1, lw=1, edgecolor='k'
         _, ax = plt.subplots()
 
     ax.set_aspect('equal')
-    norm = Normalize(vmin=vmin, vmax=vmax)
+    norm = LogNorm(vmin=vmin, vmax=vmax) if logscale else Normalize(vmin=vmin, vmax=vmax)
     cmap = plt.get_cmap(cmap)
 
     patches = []
@@ -132,12 +132,12 @@ def PlotPolygonsFields(polygons, field, cmap='jet', alpha=1, lw=1, edgecolor='k'
         # Add colorbar if needed
         sm = plt.cm.ScalarMappable(norm=norm, cmap=cmap)
         cbar = plt.colorbar(sm, ax=ax, orientation='horizontal', pad=0.02)
-        
+
         # Make colorbar ticks smarter
         tick_locator = plt.MaxNLocator(nbins=5)
         cbar.locator = tick_locator
         cbar.update_ticks()
-        if label:
+        if label is not None:
             cbar.set_label(label)
     plt.tight_layout()
 
@@ -162,7 +162,7 @@ def get_cmap(name):
     cmap_dict = {
         'elevation': 'terrain',
         'ponded_depth': cc.cm.CET_CBL2_r,
-        'surface_subsurface_flux': cc.cm.CET_R4
+        'surface_subsurface_flux': 'seismic'
     }
     return cmap_dict.get(name, 'jet')
 
@@ -175,7 +175,7 @@ def get_boundary_polygons(surface_polys):
 
 
 def plot_surface(variables, poly_surface, vis_surface, step, time, domain='surface',
-                 vmin=None, vmax=None, cmap=None):
+                 vmin=None, vmax=None, cmap=None, units=None, logscales=None):
     """
     Plot surface variables on a mesh.
 
@@ -194,7 +194,15 @@ def plot_surface(variables, poly_surface, vis_surface, step, time, domain='surfa
     _, ax = plt.subplots(1, num_plots, sharex=True, sharey=True, figsize=(4*num_plots, 6))
     plt.suptitle(f'Time: {time[step]/vis_surface.time_factor} {vis_surface.time_unit}', fontsize=16)
     for k, var in enumerate(variables):
-        data = vis_surface.getArray(domain+'-'+var)[step, :]
+        if isinstance(var, list):
+            data1 = vis_surface.getArray(domain+'-'+var[0])[step, :]
+            data2 = vis_surface.getArray(domain+'-'+var[1])[step, :]
+            data = data1 * data2
+            ax[k].set_title(f'{var[0]} * {var[1]}', y=0.95, fontsize=14)
+        else:
+            data = vis_surface.getArray(domain+'-'+var)[step, :]
+            ax[k].set_title(var, y=0.95, fontsize=14)
+        
         colormap = cmap[k] if cmap[k] is not None else get_cmap(var)
         cmin = vmin[k] if vmin is not None else None
         cmax = vmax[k] if vmax is not None else None
@@ -203,16 +211,17 @@ def plot_surface(variables, poly_surface, vis_surface, step, time, domain='surfa
             cmin = np.floor(np.nanmin(data))
         if cmax is None:
             cmax = np.ceil(np.nanmax(data))
+        unit = units[k] if units is not None else None
+        logscale = logscales[k] if logscales is not None else False
 
         PlotPolygonsFields(poly_surface, data, cmap=colormap, vmin=cmin, vmax=cmax, lw=0.2,
-                           ax=ax[k], colorbar=True)
-        ax[k].set_title(var, y=0.95, fontsize=14)
+                           ax=ax[k], label=unit, colorbar=True, logscale=logscale)
         ax[k].set_axis_off()
         gdf_clip.plot(ax=ax[k], color="None", edgecolor='k', lw=1)
 
 
 def plot_domain(variables, poly_surface, vis_domain, num_surface_elements, step, time, layer,
-                vmin=None, vmax=None, cmap=None):
+                vmin=None, vmax=None, cmap=None, units=None, logscale=False):
     """
     Plot domain variables on a mesh.
 
@@ -242,9 +251,10 @@ def plot_domain(variables, poly_surface, vis_domain, num_surface_elements, step,
             cmin = np.floor(np.nanmin(data))
         if cmax is None:
             cmax = np.ceil(np.nanmax(data))
+        unit = units[k] if units is not None else None
 
         PlotPolygonsFields(poly_surface, data, cmap=colormap, vmin=cmin, vmax=cmax, lw=0.2,
-                           ax=ax[k], colorbar=True)
+                           ax=ax[k], label=unit, colorbar=True, logscale=logscale)
         ax[k].set_title(var, y=0.95, fontsize=14)
         ax[k].set_axis_off()
         gdf_clip.plot(ax=ax[k], color="None", edgecolor='k', lw=1)
@@ -311,7 +321,7 @@ def toggle_pick_callback(point, plotter):
 
 
 def plot_mesh(domain_mesh, opacity=1, show_edges=True, show_scalar_bar=True, pickable=True,
-              show_zlabels=False, cmap='viridis', show_toplayer=False, normal=None,
+              show_zlabels=False, cmap='jet', show_toplayer=False, normal=None,
               window_size=None, link_views=True, view_isometric=False, set_background=True,
               lighting=False):
     """

@@ -12,7 +12,7 @@
       <Parameter name="mesh type" type="string" value="read mesh file" />
       <Parameter name="build columns from set" type="string" value="surface" />
       <ParameterList name="read mesh file parameters">
-        <Parameter name="file" type="string" value="../../data/toy_catchment.exo" />
+        <Parameter name="file" type="string" value="../../data/synthetic_catchment.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
       </ParameterList>
     </ParameterList>
@@ -45,20 +45,20 @@
     </ParameterList>
     <ParameterList name="left branch face">
       <ParameterList name="region: box">
-        <Parameter name="low coordinate" type="Array(double)" value="{198, 198}" />
-        <Parameter name="high coordinate" type="Array(double)" value="{200, 202}" />
+        <Parameter name="low coordinate" type="Array(double)" value="{187, 198}" />
+        <Parameter name="high coordinate" type="Array(double)" value="{188, 202}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="right branch face">
       <ParameterList name="region: box">
-        <Parameter name="low coordinate" type="Array(double)" value="{200, 198}" />
-        <Parameter name="high coordinate" type="Array(double)" value="{202, 202}" />
+        <Parameter name="low coordinate" type="Array(double)" value="{212, 198}" />
+        <Parameter name="high coordinate" type="Array(double)" value="{213, 202}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="surface">
       <ParameterList name="region: labeled set">
         <Parameter name="label" type="string" value="2" />
-        <Parameter name="file" type="string" value="../../data/toy_catchment.exo" />
+        <Parameter name="file" type="string" value="../../data/synthetic_catchment.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="face" />
       </ParameterList>
@@ -83,6 +83,7 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
+
   <ParameterList name="PKs">
 
     <ParameterList name="flow coupler">
@@ -159,7 +160,7 @@
       </ParameterList>
 
       <ParameterList name="initial condition">
-        <Parameter name="hydrostatic head [m]" type="double" value="-1.5" />
+        <Parameter name="hydrostatic head [m]" type="double" value="-1.1" />
         <Parameter name="hydrostatic water density [kg m^-3]" type="double" value="1000" />
       </ParameterList>
 
@@ -235,8 +236,8 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function">
               <ParameterList name="function-tabular">
-                <Parameter name="x values" type="Array(double)" value="{ 0,43200}" />
-                <Parameter name="y values" type="Array(double)" value="{9e-06, 0}" />
+                <Parameter name="x values" type="Array(double)" value="{ 0,57600}" />
+                <Parameter name="y values" type="Array(double)" value="{5e-06, 0}" />
                 <Parameter name="forms" type="Array(string)" value="{constant}" />
               </ParameterList>
             </ParameterList>
@@ -334,6 +335,7 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
+
   <ParameterList name="visualization">
     <ParameterList name="domain">
       <Parameter name="times start period stop" type="Array(double)" value="{ 0,1800,-1}" />

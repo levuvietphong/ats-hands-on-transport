@@ -12,7 +12,7 @@
       <Parameter name="mesh type" type="string" value="read mesh file" />
       <Parameter name="build columns from set" type="string" value="surface" />
       <ParameterList name="read mesh file parameters">
-        <Parameter name="file" type="string" value="../../data/toy_catchment.exo" />
+        <Parameter name="file" type="string" value="../../data/synthetic_catchment.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
       </ParameterList>
     </ParameterList>
@@ -45,28 +45,28 @@
     </ParameterList>
     <ParameterList name="left branch face">
       <ParameterList name="region: box">
-        <Parameter name="low coordinate" type="Array(double)" value="{198, 198}" />
-        <Parameter name="high coordinate" type="Array(double)" value="{200, 202}" />
+        <Parameter name="low coordinate" type="Array(double)" value="{187, 198}" />
+        <Parameter name="high coordinate" type="Array(double)" value="{188, 202}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="right branch face">
       <ParameterList name="region: box">
-        <Parameter name="low coordinate" type="Array(double)" value="{200, 198}" />
-        <Parameter name="high coordinate" type="Array(double)" value="{202, 202}" />
+        <Parameter name="low coordinate" type="Array(double)" value="{212, 198}" />
+        <Parameter name="high coordinate" type="Array(double)" value="{213, 202}" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="surface">
       <ParameterList name="region: labeled set">
         <Parameter name="label" type="string" value="2" />
-        <Parameter name="file" type="string" value="../../data/toy_catchment.exo" />
+        <Parameter name="file" type="string" value="../../data/synthetic_catchment.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="face" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="tracer_injection" type="ParameterList">
       <ParameterList name="region: box" type="ParameterList">
-        <Parameter name="low coordinate" type="Array(double)" value="{270, 350}" />
-        <Parameter name="high coordinate" type="Array(double)" value="{320, 400}" />
+        <Parameter name="low coordinate" type="Array(double)" value="{250, 350}" />
+        <Parameter name="high coordinate" type="Array(double)" value="{300, 400}" />
       </ParameterList>
     </ParameterList>
   </ParameterList>
@@ -335,7 +335,7 @@
         <Parameter name="constant" type="double" value=" 0" />
       </ParameterList>
       <ParameterList name="verbose object">
-        <Parameter name="verbosity level" type="string" value="high" />
+        <Parameter name="verbosity level" type="string" value="low" />
       </ParameterList>
 
       <ParameterList name="molecular diffusion">
@@ -390,8 +390,8 @@
             <Parameter name="spatial distribution method" type="string" value="volume" />
             <ParameterList name="source function">
               <ParameterList name="function-tabular" type="ParameterList">
-                <Parameter name="x values" type="Array(double)" value="{ 0,14400,57600}" />
-                <Parameter name="y values" type="Array(double)" value="{ 0, 1e6, 0}" />
+                <Parameter name="x values" type="Array(double)" value="{ 0,14400,43200}" />
+                <Parameter name="y values" type="Array(double)" value="{ 0, 10, 0}" />
                 <Parameter name="forms" type="Array(string)" value="{constant, constant}" />
               </ParameterList>
             </ParameterList>
@@ -427,8 +427,8 @@
             <Parameter name="component" type="string" value="cell" />
             <ParameterList name="function">
               <ParameterList name="function-tabular">
-                <Parameter name="x values" type="Array(double)" value="{ 0,128800}" />
-                <Parameter name="y values" type="Array(double)" value="{9e-06, 0}" />
+                <Parameter name="x values" type="Array(double)" value="{ 0,86400}" />
+                <Parameter name="y values" type="Array(double)" value="{5e-06, 0}" />
                 <Parameter name="forms" type="Array(string)" value="{constant}" />
               </ParameterList>
             </ParameterList>
@@ -476,7 +476,7 @@
       </ParameterList>
       <ParameterList name="permeability">
         <Parameter name="evaluator type" type="string" value="independent variable constant" />
-        <Parameter name="value" type="double" value="5e-12" />
+        <Parameter name="value" type="double" value="5e-13" />
       </ParameterList>
       <ParameterList name="surface-relative_permeability">
         <Parameter name="evaluator type" type="string" value="independent variable constant" />
