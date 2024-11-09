@@ -2,6 +2,11 @@
 .vscode/
 __pycache__/
 
-*.h5
+ats*.h5
+checkpoint*.h5
+ats*.xmf
+observations.csv
+
 1-hydrology/results/
 2-transport/results/
+3-submesh/results/
