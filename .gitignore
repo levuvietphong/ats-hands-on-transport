@@ -10,3 +10,9 @@ observations.csv
 1-hydrology/results/
 2-transport/results/
 3-submesh/results/
+
+slides/slides*bk*.Rmd
+slides/imgs/R/
+package*
+notebooks/.ipynb_checkpoints/
+node_modules/

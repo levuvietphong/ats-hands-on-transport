@@ -471,8 +471,8 @@ def load_mesh_exodus(mesh_file, z_scale=1.0):
     mesh = pv.read(mesh_file)
     combined_mesh = mesh.combine()
     z_values = combined_mesh.points[:, 2]  # Z values are in the 3rd column
-    combined_mesh["Z-values"] = z_values
-    domain_mesh = combined_mesh.warp_by_scalar(scalars="Z-values", factor=z_scale)
+    combined_mesh["Elevation"] = z_values
+    domain_mesh = combined_mesh.warp_by_scalar(scalars="Elevation", factor=z_scale)
     return domain_mesh
 
 
@@ -518,7 +518,7 @@ def toggle_pick_callback(point, plotter):
 
 
 def plot_mesh(domain_mesh, opacity=1, show_edges=True, show_scalar_bar=True, pickable=True,
-              show_zlabels=False, cmap='jet', show_toplayer=False, normal=None,
+              show_zlabels=False, cmap='terrain_r', show_toplayer=False, normal=None, clim=None,
               window_size=None, link_views=True, view_isometric=False, set_background=True,
               lighting=False):
     """
@@ -566,6 +566,7 @@ def plot_mesh(domain_mesh, opacity=1, show_edges=True, show_scalar_bar=True, pic
         show_scalar_bar=show_scalar_bar,
         scalar_bar_args=sargs,
         cmap=cmap,
+        clim=clim,
     )
 
     if show_toplayer:
@@ -592,9 +593,9 @@ def plot_mesh(domain_mesh, opacity=1, show_edges=True, show_scalar_bar=True, pic
     if view_isometric:
         pl.view_isometric()
     if set_background:
-        pl.set_background("royalblue", top="aliceblue")
-
+        pl.set_background("royalblue", top="aliceblue")    
     pl.show()
+    return pl
 
 
 def get_rainfall_from_xml(xml_file, time_obs, sfactor=1, parameter='surface-water_source'):

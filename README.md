@@ -1,6 +1,6 @@
 # Amanzi-ATS Transport Tutorial
 
-This hands-on tutorial offers a hands-on experience in setting up and running transport simulations based on hydrology models in [Amanzi-ATS](https://github.com/amanzi/ats). This is part of the [IDEAS-Watershed](https://ideas-watersheds.github.io/) all-hands meeting 2024 in Denver, CO.
+This tutorial offers a hands-on experience in setting up and running transport simulations based on hydrology models in [Amanzi-ATS](https://github.com/amanzi/ats). This is part of the [IDEAS-Watershed](https://ideas-watersheds.github.io/) all-hands meeting 2024 in Denver, CO.
 
 **Instructors:** Phong Le, Ethan Coon, Daniil Svyatsky
 
@@ -8,8 +8,8 @@ This hands-on tutorial offers a hands-on experience in setting up and running tr
 
 ### 1. Learning Objectives :dart:
 By the end of this workshop, participants will be able to:
-* Understand key concepts of the [transport](https://github.com/amanzi/ats/tree/master/src/pk_transport) process kernel (PK) in Amanzi-ATS;
-* Develop workflows that integrate transport PK into [hydrology](https://amanzi.github.io/ats/stable/input_spec/process_kernels/physical/flow.html) PK.
+* Understand key concepts of the [transport process kernel (PK)](https://github.com/amanzi/ats/tree/master/src/pk_transport) in Amanzi-ATS;
+* Develop workflows that couple transport PK with [hydrology PK](https://amanzi.github.io/ats/stable/input_spec/process_kernels/physical/flow.html).
 
 ---
 
@@ -20,8 +20,10 @@ To get the most out of this tutorial, participants should have:
 
 ---
 ### 3. Setup Instructions :wrench:
-The tutorial will be conducted in a Docker container. The docker includes the `terminal`, `text editor`, `ats`, `python`, `jupyter notebook`, and other dependencies. The `text editor` is customized to better work with the `ats` input files in `xml` format. Follow the steps below to set up the environment.
-1. **Pull the Docker Image:**
+The slides for the tutorial can be found [here](./slides/slides.html).
+
+The tutorial will be conducted in a `docker` container. The container includes the `terminal`, `text editor`, `ats`, `python`, `jupyter notebook`, and other dependencies. The `text editor` is customized to better work with the `ats` input files in `xml` format. Follow the steps below to set up the environment.
+1. **Pull the `docker` image:**
 Make sure to pull the Docker container for this tutorial:
 ```bash
 docker pull --platform linux/amd64 metsi/ideas-watersheds-all-hands-2024:v0
@@ -48,11 +50,11 @@ git clone https://github.com/amanzi/ats-hands-on-transport.git
 ---
 
 ### 4. Workshop Outline :memo:
-1. **Introduction to ATS Hydrology and Transport:**
-   *Overview of fundamental equations in hydrology and transport in Amanzi-ATS*
+* **Introduction to Hydrology and Transport PKs in ATS:**
+   - Overview of governing equations
+   
+* **Hands-On Session: Building Transport Simulations:**
+   - Step-by-step guidance on developing transport simulations in ATS based on the integrated hydrology model*
 
-2. **Hands-On Session: Building Transport Simulations:**
-   *Step-by-step guidance on developing transport simulations in ATS based on the integrated hydrology model*
-
-3. **Discussion and Feedback:**
-   *Open session for questions, insights, and feedback*
+* **Discussion and Feedback:**
+   - Open session for questions, insights, and feedback*
